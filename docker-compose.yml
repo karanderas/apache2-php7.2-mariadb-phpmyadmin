@@ -2,7 +2,7 @@ version: '3'
 services:
   site:
     build: site
-    container_name: apache-mvc
+    container_name: apache2
     ports :
      - "3000:80"
     volumes:
@@ -14,25 +14,25 @@ services:
 
   database:
     image: mariadb
-    container_name: mariadb-mvc
+    container_name: mariadb
     ports :
      - "3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: mvcdocker
-    volumes:
-      - db_data_mvc:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: docker
+#    volumes:
+#      - db_data_mvc:/var/lib/mysql
     restart: always
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    container_name: phpmyadmin-mvc
+    container_name: phpmyadmin
     depends_on:
       - database
     ports:
       - 8000:80
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: admin
       PMA_HOST: database
 
 volumes:
